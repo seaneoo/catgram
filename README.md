@@ -1,0 +1,5 @@
+# Catgram
+
+## License
+
+[MIT](LICENSE)
