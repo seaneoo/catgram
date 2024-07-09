@@ -2,18 +2,20 @@ package dev.seano.catgram_backend.feature.user
 
 import com.fasterxml.jackson.annotation.JsonIgnore
 import dev.seano.catgram_backend.feature.auth.UserAuth
+import dev.seano.catgram_backend.feature.pet.Pet
 import jakarta.persistence.*
-import org.springframework.data.jpa.domain.support.AuditingEntityListener
+import jakarta.persistence.CascadeType.ALL
+import jakarta.persistence.FetchType.EAGER
 
 @Entity
 @Table(name = "user_profile")
-@EntityListeners(AuditingEntityListener::class)
 data class UserProfile(
 	@Id val id: Int? = null,
 	@OneToOne @MapsId @JsonIgnore val auth: UserAuth,
 	@Column(nullable = true) val bio: String? = null,
 	@Column(nullable = true) val gender: String? = null,
-	@Column(nullable = true) val pronouns: String? = null
+	@Column(nullable = true) val pronouns: String? = null,
+	@OneToMany(fetch = EAGER, cascade = [ALL], mappedBy = "user") @JsonIgnore var pets: List<Pet>? = null
 ) {
 
 	fun response() = UserResponse(
