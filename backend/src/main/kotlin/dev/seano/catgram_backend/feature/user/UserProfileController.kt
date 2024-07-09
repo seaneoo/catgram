@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @Suppress("unused")
 @RestController
-@RequestMapping("/v1/user")
+@RequestMapping("/v1/users")
 class UserProfileController {
 
 	@GetMapping("/me")
