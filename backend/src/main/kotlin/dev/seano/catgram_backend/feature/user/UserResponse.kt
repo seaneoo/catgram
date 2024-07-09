@@ -1,4 +1,4 @@
-package dev.seano.catgram_backend.user
+package dev.seano.catgram_backend.feature.user
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import java.time.Instant

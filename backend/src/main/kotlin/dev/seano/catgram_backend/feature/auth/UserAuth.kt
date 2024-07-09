@@ -1,7 +1,7 @@
-package dev.seano.catgram_backend.auth
+package dev.seano.catgram_backend.feature.auth
 
 import com.fasterxml.jackson.annotation.JsonIgnore
-import dev.seano.catgram_backend.user.UserProfile
+import dev.seano.catgram_backend.feature.user.UserProfile
 import jakarta.persistence.*
 import jakarta.persistence.CascadeType.ALL
 import jakarta.persistence.GenerationType.IDENTITY

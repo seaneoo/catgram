@@ -1,9 +1,9 @@
-package dev.seano.catgram_backend.auth
+package dev.seano.catgram_backend.feature.auth
 
-import dev.seano.catgram_backend.auth.model.LoginPayload
-import dev.seano.catgram_backend.auth.model.RegistrationPayload
+import dev.seano.catgram_backend.feature.auth.model.LoginPayload
+import dev.seano.catgram_backend.feature.auth.model.RegistrationPayload
+import dev.seano.catgram_backend.feature.user.UserProfile
 import dev.seano.catgram_backend.security.JwtService
-import dev.seano.catgram_backend.user.UserProfile
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional

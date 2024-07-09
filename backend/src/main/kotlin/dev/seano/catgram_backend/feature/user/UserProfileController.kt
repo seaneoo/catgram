@@ -1,6 +1,6 @@
-package dev.seano.catgram_backend.user
+package dev.seano.catgram_backend.feature.user
 
-import dev.seano.catgram_backend.auth.UserAuth
+import dev.seano.catgram_backend.feature.auth.UserAuth
 import org.springframework.http.ResponseEntity
 import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.web.bind.annotation.GetMapping

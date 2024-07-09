@@ -1,7 +1,7 @@
-package dev.seano.catgram_backend.auth
+package dev.seano.catgram_backend.feature.auth
 
-import dev.seano.catgram_backend.auth.model.LoginPayload
-import dev.seano.catgram_backend.auth.model.RegistrationPayload
+import dev.seano.catgram_backend.feature.auth.model.LoginPayload
+import dev.seano.catgram_backend.feature.auth.model.RegistrationPayload
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping

@@ -1,7 +1,7 @@
-package dev.seano.catgram_backend.user
+package dev.seano.catgram_backend.feature.user
 
 import com.fasterxml.jackson.annotation.JsonIgnore
-import dev.seano.catgram_backend.auth.UserAuth
+import dev.seano.catgram_backend.feature.auth.UserAuth
 import jakarta.persistence.*
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
 

@@ -1,4 +1,4 @@
-package dev.seano.catgram_backend.auth
+package dev.seano.catgram_backend.feature.auth
 
 import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository
