@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/v1/auth")
 class UserAuthController(private val userAuthService: UserAuthService) {
-	
+
 	@PostMapping("/register")
-	fun register(@RequestBody payload: RegistrationPayload): ResponseEntity<HashMap<String, Int>> {
-		val user = userAuthService.register(payload)
-		return ResponseEntity.status(HttpStatus.CREATED).body(hashMapOf("id" to user.id!!))
+	fun register(@RequestBody payload: RegistrationPayload): ResponseEntity<Any> {
+		userAuthService.register(payload)
+		return ResponseEntity.status(HttpStatus.CREATED).build()
 	}
 
 	@PostMapping("/login")
