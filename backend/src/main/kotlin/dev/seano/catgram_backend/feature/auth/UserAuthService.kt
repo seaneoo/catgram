@@ -20,7 +20,7 @@ class UserAuthService(
 		val hashedPassword = passwordEncoder.encode(payload.password)
 
 		val userAuth = UserAuth(username = payload.username.lowercase(), password = hashedPassword)
-		val userProfile = UserProfile(auth = userAuth)
+		val userProfile = UserProfile(user = userAuth)
 		userAuth.profile = userProfile
 		return userAuthRepository.save(userAuth)
 	}

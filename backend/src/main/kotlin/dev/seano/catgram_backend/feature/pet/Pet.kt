@@ -16,7 +16,7 @@ import java.time.Instant
 @EntityListeners(AuditingEntityListener::class)
 data class Pet(
 	@Id @GeneratedValue(strategy = IDENTITY) val id: Int? = null,
-	@ManyToOne(fetch = EAGER) @JsonIgnore val user: UserProfile,
+	@ManyToOne(fetch = EAGER) @JoinColumn(name = "user_id") @JsonIgnore val user: UserProfile,
 	@Column(nullable = false) val name: String,
 	@Column(nullable = false) val species: String,
 	@CreationTimestamp @Column(name = "created_at") val createdAt: Instant? = null,

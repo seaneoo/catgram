@@ -21,7 +21,7 @@ data class UserAuth(
 	@Column(nullable = false) @JvmField val password: String,
 	@CreationTimestamp @Column(name = "created_at") val createdAt: Instant? = null,
 	@UpdateTimestamp @Column(name = "updated_at") val updatedAt: Instant? = null,
-	@OneToOne(cascade = [ALL], mappedBy = "auth") @JsonIgnore var profile: UserProfile? = null
+	@OneToOne(cascade = [ALL], mappedBy = "user") @JsonIgnore var profile: UserProfile? = null
 ) : UserDetails {
 
 	override fun getAuthorities(): MutableCollection<out GrantedAuthority> = mutableListOf()

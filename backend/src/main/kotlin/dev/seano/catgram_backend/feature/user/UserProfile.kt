@@ -11,7 +11,7 @@ import jakarta.persistence.FetchType.EAGER
 @Table(name = "user_profile")
 data class UserProfile(
 	@Id val id: Int? = null,
-	@OneToOne @MapsId @JsonIgnore val auth: UserAuth,
+	@OneToOne @MapsId @JsonIgnore val user: UserAuth,
 	@Column(nullable = true) val bio: String? = null,
 	@Column(nullable = true) val gender: String? = null,
 	@Column(nullable = true) val pronouns: String? = null,
@@ -20,8 +20,8 @@ data class UserProfile(
 
 	fun response() = UserResponse(
 		id = id!!,
-		username = auth.username,
-		createdAt = auth.createdAt!!,
+		username = user.username,
+		createdAt = user.createdAt!!,
 		bio = bio,
 		gender = gender,
 		pronouns = pronouns
