@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import useAuthHeader from "react-auth-kit/hooks/useAuthHeader";
+import Pets from "./Pets";
 import SignOut from "./SignOut";
 
 type UserModel = {
@@ -15,7 +16,7 @@ const User = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/v1/user/me", {
+      .get("http://localhost:8080/v1/users/me", {
         headers: { Authorization: authHeader },
       })
       .then((res) => {
@@ -34,6 +35,9 @@ const User = () => {
         <br />
         Created: {user?.created_at}
       </pre>
+
+      <Pets />
+
       <SignOut />
     </div>
   );
