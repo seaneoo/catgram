@@ -14,9 +14,16 @@ import org.springframework.web.bind.annotation.*
 class PetController(private val petService: PetService) {
 
 	@GetMapping
-	fun allPetsForUser(@AuthenticationPrincipal userAuth: UserAuth): ResponseEntity<List<PetResponse>> {
+	fun findPets(
+		@RequestParam(required = false) name: String? = null, @AuthenticationPrincipal userAuth: UserAuth
+	): ResponseEntity<List<PetResponse>> {
 		val userProfile = userAuth.profile ?: throw Exception("User not found")
-		return ResponseEntity.ok(userProfile.pets?.map { it.response() })
+		val pets = if (name == null) {
+			petService.findAllByUsername(userProfile).map { it.response() }
+		} else {
+			petService.findByNameAndUsername(name, userProfile).map { it.response() }
+		}
+		return ResponseEntity.ok(pets)
 	}
 
 	@PostMapping
