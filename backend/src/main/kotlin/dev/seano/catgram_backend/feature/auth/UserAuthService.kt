@@ -1,11 +1,11 @@
 package dev.seano.catgram_backend.feature.auth
 
+import dev.seano.catgram_backend.error.BadCredentialsException
 import dev.seano.catgram_backend.error.UserNotFoundException
 import dev.seano.catgram_backend.feature.auth.model.LoginPayload
 import dev.seano.catgram_backend.feature.auth.model.RegistrationPayload
 import dev.seano.catgram_backend.feature.user.UserProfile
 import dev.seano.catgram_backend.security.JwtService
-import org.springframework.security.authentication.BadCredentialsException
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional

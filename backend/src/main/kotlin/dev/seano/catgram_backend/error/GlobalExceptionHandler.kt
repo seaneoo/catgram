@@ -6,7 +6,6 @@ import org.slf4j.LoggerFactory
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.security.authentication.BadCredentialsException
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
 import java.sql.SQLException
@@ -51,9 +50,9 @@ class GlobalExceptionHandler(private val logger: Logger = LoggerFactory.getLogge
 		return ResponseEntity.status(httpStatus).body(response)
 	}
 
-	@ExceptionHandler(BadCredentialsException::class)
-	fun handleBadCredentialsException(
-		req: HttpServletRequest, e: BadCredentialsException
+	@ExceptionHandler(BadRequestException::class)
+	fun handleBadRequestException(
+		req: HttpServletRequest, e: BadRequestException
 	): ResponseEntity<ExceptionResponse> {
 		val httpStatus = HttpStatus.BAD_REQUEST
 		val response = ExceptionResponse(
