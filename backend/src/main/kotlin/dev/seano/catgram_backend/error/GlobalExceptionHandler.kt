@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.http.converter.HttpMessageNotReadableException
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
 import java.sql.SQLException
@@ -46,6 +47,20 @@ class GlobalExceptionHandler(private val logger: Logger = LoggerFactory.getLogge
 			statusReason = httpStatus.reasonPhrase,
 			path = req.requestURI,
 			message = message
+		)
+		return ResponseEntity.status(httpStatus).body(response)
+	}
+
+	@ExceptionHandler(HttpMessageNotReadableException::class)
+	fun handleHttpMessageNotReadableException(
+		req: HttpServletRequest, e: HttpMessageNotReadableException
+	): ResponseEntity<ExceptionResponse> {
+		val httpStatus = HttpStatus.BAD_REQUEST
+		val response = ExceptionResponse(
+			statusCode = httpStatus.value(),
+			statusReason = httpStatus.reasonPhrase,
+			path = req.requestURI,
+			message = null
 		)
 		return ResponseEntity.status(httpStatus).body(response)
 	}
