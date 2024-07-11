@@ -12,7 +12,7 @@ import jakarta.persistence.FetchType.EAGER
 data class UserProfile(
 	@Id val id: Int? = null,
 	@OneToOne @MapsId @JsonIgnore val user: UserAuth,
-	@Column(nullable = true) val displayName: String? = null,
+	@Column(name = "display_name", nullable = true) val displayName: String? = null,
 	@Column(nullable = true) val bio: String? = null,
 	@Column(nullable = true) val gender: String? = null,
 	@Column(nullable = true) val pronouns: String? = null,
