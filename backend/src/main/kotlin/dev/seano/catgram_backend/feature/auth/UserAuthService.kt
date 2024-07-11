@@ -1,9 +1,11 @@
 package dev.seano.catgram_backend.feature.auth
 
+import dev.seano.catgram_backend.error.UserNotFoundException
 import dev.seano.catgram_backend.feature.auth.model.LoginPayload
 import dev.seano.catgram_backend.feature.auth.model.RegistrationPayload
 import dev.seano.catgram_backend.feature.user.UserProfile
 import dev.seano.catgram_backend.security.JwtService
+import org.springframework.security.authentication.BadCredentialsException
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -27,11 +29,14 @@ class UserAuthService(
 
 	@Transactional
 	fun login(payload: LoginPayload): String {
-		val user = userAuthRepository.findByUsername(payload.username.lowercase()) ?: throw Exception("User not found")
-		if (!passwordEncoder.matches(payload.password, user.password)) throw Exception("Bad credentials")
+		val user = userAuthRepository.findByUsername(payload.username.lowercase()) ?: throw UserNotFoundException()
+		if (!passwordEncoder.matches(
+				payload.password, user.password
+			)
+		) throw BadCredentialsException("Incorrect username or password.")
 
 		val token = jwtService.generateToken(user)
-			?: throw Exception("Could not generate a token. If this issue persists, please contact support.")
+			?: throw RuntimeException("Could not generate a token. If this issue persists, please contact support.")
 		return token
 	}
 }

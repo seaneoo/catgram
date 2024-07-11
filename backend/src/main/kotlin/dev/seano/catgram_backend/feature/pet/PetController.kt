@@ -1,5 +1,6 @@
 package dev.seano.catgram_backend.feature.pet
 
+import dev.seano.catgram_backend.error.UserNotFoundException
 import dev.seano.catgram_backend.feature.auth.UserAuth
 import dev.seano.catgram_backend.feature.pet.model.CreatePetPayload
 import dev.seano.catgram_backend.feature.pet.model.PetResponse
@@ -17,7 +18,7 @@ class PetController(private val petService: PetService) {
 	fun findPets(
 		@RequestParam(required = false) name: String? = null, @AuthenticationPrincipal userAuth: UserAuth
 	): ResponseEntity<List<PetResponse>> {
-		val userProfile = userAuth.profile ?: throw Exception("User not found")
+		val userProfile = userAuth.profile ?: throw UserNotFoundException()
 		val pets = if (name == null) {
 			petService.findAllByUsername(userProfile).map { it.response() }
 		} else {
@@ -30,7 +31,7 @@ class PetController(private val petService: PetService) {
 	fun createPetForUser(
 		@RequestBody createPetPayload: CreatePetPayload, @AuthenticationPrincipal userAuth: UserAuth
 	): ResponseEntity<Any> {
-		val userProfile = userAuth.profile ?: throw Exception("User not found")
+		val userProfile = userAuth.profile ?: throw UserNotFoundException()
 		petService.create(createPetPayload, userProfile)
 		return ResponseEntity.status(HttpStatus.CREATED).build()
 	}
