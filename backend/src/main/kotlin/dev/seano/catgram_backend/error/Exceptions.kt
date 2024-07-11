@@ -7,3 +7,6 @@ class UserNotFoundException(override val message: String? = "User not found") : 
 open class BadRequestException(override val message: String? = null) : RuntimeException(message)
 
 class BadCredentialsException(override val message: String? = "") : BadRequestException(message)
+
+class PasswordsDoNotMatchException(override val message: String? = "Passwords do not match") :
+	BadRequestException(message)

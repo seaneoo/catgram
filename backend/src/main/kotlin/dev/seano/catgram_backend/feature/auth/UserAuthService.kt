@@ -1,6 +1,7 @@
 package dev.seano.catgram_backend.feature.auth
 
 import dev.seano.catgram_backend.error.BadCredentialsException
+import dev.seano.catgram_backend.error.PasswordsDoNotMatchException
 import dev.seano.catgram_backend.error.UserNotFoundException
 import dev.seano.catgram_backend.feature.auth.model.LoginPayload
 import dev.seano.catgram_backend.feature.auth.model.RegistrationPayload
@@ -19,6 +20,7 @@ class UserAuthService(
 
 	@Transactional
 	fun register(payload: RegistrationPayload): UserAuth {
+		if (payload.password != payload.passwordVerify) throw PasswordsDoNotMatchException()
 		val hashedPassword = passwordEncoder.encode(payload.password)
 
 		val userAuth = UserAuth(username = payload.username.lowercase(), password = hashedPassword)
